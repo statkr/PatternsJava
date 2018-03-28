@@ -1,5 +1,7 @@
 package factory;
 
+import decorator.PupilConcurrent;
+
 public class Pupils {
     private static PupilFactory factory = new StudentsFactory();
 
@@ -23,5 +25,9 @@ public class Pupils {
             summ += pupil.getMark(i);
         }
         return summ / pupil.getSubjectsSize();
+    }
+
+    public static Pupil synchronizePupil(Pupil pupil){
+        return new PupilConcurrent(pupil);
     }
 }
