@@ -1,11 +1,16 @@
 package factory;
 
+import command.Command;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 
 public class Student implements Pupil {
     private String name;
     private int[] marks;
     private String[] subjects;
+    private Command command;
 
     public Student(String name, int size) {
         this.name = name;
@@ -54,5 +59,13 @@ public class Student implements Pupil {
     @Override
     public int getSubjectsSize() {
         return marks.length;
+    }
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public void printCommand(OutputStream stream) throws IOException {
+        command.print(stream);
     }
 }

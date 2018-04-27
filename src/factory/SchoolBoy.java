@@ -1,6 +1,7 @@
 package factory;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class SchoolBoy implements Pupil {
     private String name;
@@ -55,6 +56,10 @@ public class SchoolBoy implements Pupil {
         return registers.length;
     }
 
+    public Iterator<String> iterator() {
+        return new SubjectIterator(registers.clone());
+    }
+
     private class Register {
         private String subject;
         private int mark;
@@ -81,6 +86,32 @@ public class SchoolBoy implements Pupil {
 
         public void setMark(int mark) {
             this.mark = mark;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[%10s] - %d  ", subject, mark);
+        }
+    }
+
+    private class SubjectIterator implements Iterator<String> {
+
+        private Register[] registers;
+        private int currentIndex = 0;
+
+        private SubjectIterator(Register[] registers) {
+            this.registers = registers;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < registers.length;
+        }
+
+        @Override
+        public String next() {
+            return registers[currentIndex++].toString();
         }
     }
 }

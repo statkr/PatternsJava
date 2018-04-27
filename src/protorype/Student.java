@@ -63,4 +63,35 @@ public class Student implements Pupil {
         clone.marks = Arrays.copyOf(marks, marks.length);
         return clone;
     }
+
+    public Momento createMomento() {
+        try {
+            return new Momento(this.clone());
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+
+    public void setMomento(Momento momento) {
+        try {
+            Student student = momento.getStudent().clone();
+            marks = student.marks;
+            subjects = student.subjects;
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static class Momento {
+        private Student student;
+
+        Momento(Student student) {
+            this.student = student;
+        }
+
+        Student getStudent() {
+            return student;
+        }
+
+    }
 }
