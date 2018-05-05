@@ -4,9 +4,10 @@ import command.Command;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Student implements Pupil {
+public class Student implements Pupil, Serializable {
     private String name;
     private int[] marks;
     private String[] subjects;
@@ -67,5 +68,10 @@ public class Student implements Pupil {
 
     public void printCommand(OutputStream stream) throws IOException {
         command.print(stream);
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + Arrays.toString(subjects) + " " + Arrays.toString(marks);
     }
 }
